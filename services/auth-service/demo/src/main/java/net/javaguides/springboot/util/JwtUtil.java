@@ -4,6 +4,8 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import net.javaguides.springboot.service.TokenBlacklistService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -17,6 +19,13 @@ public class JwtUtil {
 
     @Value("${jwt.secret.key}")
     private String jwtSecret;
+
+    private final TokenBlacklistService tokenBlacklistService;
+
+    @Autowired
+    public JwtUtil(TokenBlacklistService tokenBlacklistService) {
+        this.tokenBlacklistService = tokenBlacklistService;
+    }
 
     // Метод для генерации токена
     public String generateToken(String username, Long roleId) {
@@ -44,5 +53,24 @@ public class JwtUtil {
     }
     private SecretKey getSigningKey() {
         return new SecretKeySpec(jwtSecret.getBytes(), SignatureAlgorithm.HS256.getJcaName());
+    }
+
+    public boolean isTokenValid(String token) {
+        try {
+            // Проверяем, не находится ли токен в черном списке
+            if (tokenBlacklistService.
+                    isTokenBlacklisted(token)) {
+                return false;
+            }
+
+            // Проверяем валидность токена
+            Jwts.parserBuilder()
+                    .setSigningKey(getSigningKey())
+                    .build()
+                    .parseClaimsJws(token);
+            return true;
+        } catch (JwtException | IllegalArgumentException e) {
+            return false;
+        }
     }
 }
