@@ -1,71 +1,83 @@
 <div align="center">
 
-# Практическая работа №1
+# Практическая работа №2
 
-![alt text](resources/DFd5mM9T8yU.jpg)
+![alt text](resources/kaguya.jpg)
 
 </div>
 
 ## Цель
 
-Применить async к Вашей DSS и подключить хранилище данных.
+Распилить Вашу DSS на сервисы.
 
 ## Задачи
 
-1. Подключить async-runtime к Вашей DSS.
-2. Подключить выбранную СУБД к Вашей DSS (InMemoryUserRepository -> MySQLUserRepository).
-3. Явно выделить слои Вашей DSS и отразить их в коде:
-   1. Выбранный фреймворк (api endpoints, console app, etc.)
-   2. Application (принимает и возвращает DTO)
-   3. Domain (принимает Command, возвращает Event)*
-   4. Infrastructure (реализация Repository, доступ к внешним сервисам, СУБД)
-   5. Util (логирование и т.д.)**
-4. Обновить или написать необходимые тесты.
-5. Сформировать первичные Dockerfile и docker-compose Вашей DSS и её инфраструктуры (на основе шаблона).
+1. Определить API Вашей DSS:
+   1. Синхронный (RPC) или асинхронный (Event-based)? (Обосновать)
+   2. Реализовать его с помощью выбранного фреймворка
+2. Разделить Вашу систему на сервисы:
+   1. Ограниченные контексты, выделенные в [П0](./practice0.md) - это буквально Ваши сервисы.
+   2. Определить и реализовать интерфейсы сервисов (также как и для всей системы в п.1).
+3. Обернуть сервисы в Dockerfile и обновить docker-compose.
+4. Обновить или дописать необходимые тесты.
+5. Подумать над выделением шаблонного репозитория.
 
 ## Реализация
 
-БД: **PostreSQL**  
-Количество реализованных сервисов: 3  
+Выбор асинхронной (Event-based) архитектуры для реализации **API DSS** обоснован высокой масштабируемостью и производительностью, что позволяет эффективно обрабатывать большое количество транзакций одновременно. Асинхронные системы обеспечивают устойчивость к сбоям, позволяя продолжать обработку событий даже при временной недоступности некоторых компонентов, что критично сказывает на работе системы целиком. Кроме того, легко интегрировать новые сервисы и технологии!
 
-Были реализованы следующие эндпоинты (async) в сервисе "company-service":
+Систему успешно попилил.   
+В качестве демонстрации представлено 3 сервиса: "auth-service", "company-vacancy-service" и "notification-service" (уведомляшки).  
+Код каждого можно посмотреть в папке ***servicec***.
 
-![alt text](resources/comp_as1.png)
+***Комментарий***: для каждого из сервисов (auth и company-vacancy) поднимается свой контейнер с БД. Также внутри auth-service реализована логика блэк-листа (redis), в который добавляются досрочно невалидные токены (к примеру при смене логина в системе). Также в роли продюссера выступает auth-service, который посылает обновление в брокер-сообщений (kafka), а консьюмер - notification-service, который слушает и отправляет уведомления на почту при успешной регистрации \ успешном изменении логина (email).   
+**Скриншоты кода привёл ниже.**
 
-![alt text](resources/comp_as2.png)
+### Кафка Producer
 
-Был реализован эндпоинт (async) в сервисе "vacancy-service":
+![alt text](resources/kafka-produccer.png)
 
-![alt text](resources/vac_as1.png)
+![alt text](resources/kafka-prod.png)
 
-Были реализованы следующие эндпоинты (async) в сервисе "auth-service":
+![alt text](resources/kafka-prod2.png)
 
-![alt text](resources/user_as1.png)
+### Кафка Consumer
 
-![alt text](resources/user_as2.png)
-
-![alt text](resources/user_as3.png)
-
-![alt text](resources/user_as4.png)
-
-![alt text](resources/user_as5.png)
+![alt text](resources/nof-service.png)
 
 
-## Dokerfiles (в пример для 2 сервисов):
+### DOCKER-File сервиса аутентификации:
 
-![alt text](resources/docker1.png)
+![alt text](resources/docker-auth.png)
 
-![alt text](resources/docker2.png)
+### DOCKER-File сервиса компаний и вакансий:
 
-## Docker-compose:  
-Комментарий: надо бы потом в secrets добавить, а не явно прописывать))))
+![alt text](resources/docker-comp.png)
 
-![alt text](resources/doc-comp.png)
+### DOCKER-File сервиса уведомлений:
 
-## built.bat (для локальной сборки):  
+![alt text](resources/docker-notific.png)
 
-![alt text](resources/bul.png)
+### Обновлённый DOCKER-COMPOSE (влез в 3 скрина...):
 
-### Контейнеры:
+![alt text](resources/dock-compos.png)
 
-![alt text](resources/dock.png)
+![alt text](resources/docker-comp2.png)
+
+![alt text](resources/docker-comp3.png)
+
+### Как выглядят контейнеры:
+
+![alt text](resources/docker-cont.png)
+
+### В качестве выделенного репозитория используется JPA-репозиторий:
+
+![alt text](resources/jpa.png)
+
+### Написаны mock-тесты, а также интеграционные тесты с использованием @Testcontainers, в котором поднимаются тестовая бд, кафка:
+
+***Пример тестов*** (в разных сервисах, подробнее можно посмотреть в (имя сервиса)/dome/test/java/(имя класса)):
+
+![alt text](resources/test1.png)
+
+![alt text](resources/test2.png)
