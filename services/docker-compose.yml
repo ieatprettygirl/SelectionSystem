@@ -1,0 +1,122 @@
+services:
+
+  zookeeper:
+    image: bitnami/zookeeper:latest
+    ports:
+      - "2181:2181"
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+  kafka:
+    image: bitnami/kafka:latest
+    ports:
+      - "9092:9092"
+    environment:
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
+    depends_on:
+      - zookeeper
+    healthcheck:
+      test: ["CMD-SHELL", "kafka-topics.sh --list --bootstrap-server localhost:9092"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: always
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  
+  auth-db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: AuthDb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345678
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    # volumes:
+    #   - postgres_data:/var/lib/postgresql/data
+  company-vacancy-db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: CompVacDb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345678
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    ports:
+      - "5433:5432"
+    # volumes:
+    #   - postgres_data:/var/lib/postgresql/data
+    
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"  # Доступ к pgAdmin через http://localhost:5050
+
+  company-vacancy-service:
+    build:
+      context: ./company-vacancy-service
+    ports:
+      - "8083:8083"
+    depends_on:
+      company-vacancy-db:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://company-vacancy-db:5432/CompVacDb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 12345678
+      SPRING_REDIS_HOST: redis
+      SPRING_REDIS_PORT: 6379
+  auth-service:
+    build:
+      context: ./auth-service
+    ports:
+      - "8080:8080"
+    depends_on:
+      auth-db:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      SPRING_DATASOURCE_URL: jdbc:postgresql://auth-db:5432/AuthDb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 12345678
+      SPRING_REDIS_HOST: redis
+      SPRING_REDIS_PORT: 6379
+  notification-service:
+    build:
+      context: ./notification-service
+    ports:
+      - "8081:8081"
+    depends_on:
+    - redis
+    environment:
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+volumes:
+  postgres_data:
+  redis_data:
