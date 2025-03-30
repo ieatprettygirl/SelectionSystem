@@ -30,7 +30,7 @@ public class User {
     private Role role;
 
     @Column(nullable = false)
-    private boolean enabled = false; // from email
+    private Boolean enabled = false; // from email
 
     private Long company_id;
 

@@ -6,6 +6,7 @@ import jakarta.transaction.Transactional;
 import net.javaguides.springboot.dto.UserGetOneDTO;
 import net.javaguides.springboot.model.Role;
 import net.javaguides.springboot.model.User;
+import net.javaguides.springboot.repository.UserRepository;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -60,8 +61,12 @@ public class TestAuth {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    private final UserRepository userRepository;
+
+    @Autowired
+    public TestAuth(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @DynamicPropertySource
     static void registerPgProperties(DynamicPropertyRegistry registry) {
@@ -72,7 +77,7 @@ public class TestAuth {
         registry.add("spring.kafka.bootstrap-servers", kafka::getBootstrapServers);
     }
 
-    @DisplayName("Register user")
+    @DisplayName("Успешная регистрация пользователя")
     @Test
     public void testRegisterUser() throws Exception {
         Map<String, String> user = Map.of(
@@ -112,7 +117,7 @@ public class TestAuth {
         }
     }
 
-    @DisplayName("Unsuccessfully login user")
+    @DisplayName("Ошибка регистрации если не подтверждён аккаунт")
     @Test
     public void testAuthUserIsForbidden() throws Exception {
         Map<String, String> user = Map.of(
@@ -128,22 +133,13 @@ public class TestAuth {
 
     }
 
-    @DisplayName("Login user")
+    @DisplayName("Успешный вход пользователя в систему")
     @Test
-    @Transactional
     public void testAuthUser() throws Exception {
         Role role = new Role(2L, "Пользователь");
         User user = new User("testuser@mail.ru", passwordEncoder.encode("password"), role);
         user.setEnabled(true);
-        entityManager.persist(user); // Сохраняем пользователя
-        entityManager.flush();
-
-        User savedUser = entityManager.find(User.class, user.getUser_id());
-        System.out.println("Saved user: " + savedUser);
-
-        User savedUser2 = entityManager.find(User.class, 1);
-        System.out.println("Saved user: " + savedUser2);
-
+        userRepository.save(user);
 
         Map<String, String> user1 = Map.of(
                 "login", "testuser@mail.ru",

@@ -26,7 +26,7 @@ import net.javaguides.springboot.repository.CompanyRepository;
 @EnableAsync
 @Slf4j
 // base URL
-@RequestMapping("/api/")
+@RequestMapping("/api/comp-vac/")
 public class CompanyController {
 
     private final CompanyService companyService;

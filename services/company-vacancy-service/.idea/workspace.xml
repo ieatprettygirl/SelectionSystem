@@ -4,21 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e309011c-4768-4e8b-bc19-d4ef95e48500" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../auth-service/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-service/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../auth-service/demo/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-service/demo/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../auth-service/demo/src/main/java/net/javaguides/springboot/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-service/demo/src/main/java/net/javaguides/springboot/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../auth-service/demo/src/main/java/net/javaguides/springboot/model/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-service/demo/src/main/java/net/javaguides/springboot/model/Role.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../auth-service/demo/src/main/java/net/javaguides/springboot/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-service/demo/src/main/java/net/javaguides/springboot/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../auth-service/demo/src/main/java/net/javaguides/springboot/service/KafkaProducerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-service/demo/src/main/java/net/javaguides/springboot/service/KafkaProducerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../auth-service/demo/src/main/java/net/javaguides/springboot/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-service/demo/src/main/java/net/javaguides/springboot/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../auth-service/demo/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-service/demo/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../auth-service/demo/src/test/java/net/javaguides/springboot/SpringbootBackendApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../notification-service/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../notification-service/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../notification-service/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../notification-service/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../notification-service/demo/src/main/java/com/example/demo/service/EmailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../notification-service/demo/src/main/java/com/example/demo/service/EmailService.java" afterDir="false" />
-    </list>
+    <list default="true" id="e309011c-4768-4e8b-bc19-d4ef95e48500" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -193,6 +179,13 @@
       <workItem from="1741356680961" duration="2390000" />
       <workItem from="1741499593770" duration="1873000" />
       <workItem from="1741523872838" duration="349000" />
+      <workItem from="1741609031155" duration="4000" />
+      <workItem from="1741609045458" duration="1047000" />
+      <workItem from="1741610816546" duration="1910000" />
+      <workItem from="1743167789116" duration="4514000" />
+      <workItem from="1743193978874" duration="1897000" />
+      <workItem from="1743277102807" duration="8353000" />
+      <workItem from="1743312809577" duration="3246000" />
     </task>
     <servers />
   </component>

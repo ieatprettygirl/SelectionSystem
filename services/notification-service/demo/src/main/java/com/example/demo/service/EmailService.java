@@ -57,8 +57,8 @@ public class EmailService {
     @Async
     public void sendConfirmationChangeEmail(String to, String token) {
         String subject = "Подтверждение изменения ";
-        String confirmationUrl = "http://localhost:8080/api/auth/confirm-email-change?token=" + token;
-        String message = "Перейдите по ссылке для смены email: " + confirmationUrl;
+        String confirmationUrl = "http://localhost/api/auth/confirm-email-change?token=" + token;
+        String message = "Перейдите по ссылке для подтверждения смены email: " + confirmationUrl;
 
         SimpleMailMessage email = new SimpleMailMessage();
         email.setTo(to);
@@ -71,8 +71,8 @@ public class EmailService {
     @Async
     public void sendVerificationEmail(String to, String token) {
         String subject = "Подтверждение регистрации";
-        String confirmationUrl = "http://localhost:8080/api/auth/confirm?token=" + token;
-        String message = "Перейдите по ссылке для подтверждения аккаунта: " + confirmationUrl;
+        String confirmationUrl = "http://localhost/api/auth/confirm?token=" + token;
+        String message = "Перейдите по ссылке для подтверждения верификации аккаунта: " + confirmationUrl;
 
         SimpleMailMessage email = new SimpleMailMessage();
         email.setTo(to);

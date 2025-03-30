@@ -60,14 +60,14 @@ public class UserService {
 
     @Async
     public CompletableFuture<ResponseEntity<Map<String, Object>>> createUser(User user) {
+        log.info("Пользователь в потоке");
         Map<String, Object> response = new HashMap<>();
         if (isValidEmail(user.getLogin())) {
             response.put("success", false);
             response.put("message", "Невалидный email!");
             return CompletableFuture.completedFuture(ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response));
         }
-
-        String token = registerUser(user.getLogin(), user.getPassword(), user.getRole());
+        String token = registerUser(user);
 
         kafkaProducerService.sendUserRegistrationEvent(user.getLogin(), token); // отправка события в кафку
 
@@ -193,7 +193,7 @@ public class UserService {
             return CompletableFuture.completedFuture(ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response));
         }
         if (login != null && !login.equals(existingUser.getLogin())) {
-            checkLoginUnique(login);
+            checkLoginUniqueForUpdate(login);
 
             String newToken = jwtUtil.generateToken(login, existingUser.getRole().getRole_id());
             existingUser.setPendingLogin(login);
@@ -230,26 +230,35 @@ public class UserService {
         return null;
     }
 
-    public void checkLoginUnique(String login) {
+    public void checkLoginUnique(User user) {
+        if (userRepository.existsByLogin(user.getLogin())) {
+            User existingUser = userRepository.findByLogin(user.getLogin())
+                    .orElseThrow(() -> new RuntimeException("Неверный логин!"));
+            if (!existingUser.getEnabled()) { userRepository.delete(existingUser); }
+            else { throw new IllegalArgumentException("Данная почта уже используется!"); }
+        }
+    }
+
+    public void checkLoginUniqueForUpdate(String login) {
         if (userRepository.existsByLogin(login)) {
             throw new IllegalArgumentException("Данная почта уже используется!");
         }
     }
 
-    public String registerUser(String login, String password, Role role) {
+    public String registerUser(User user) {
+        checkLoginUnique(user); // проверка уникальности
 
-        checkLoginUnique(login); // проверка уникальности
-        String hashedPassword = passwordEncoder.encode(password);
-        User user = new User(login, hashedPassword, role);
-        user.setEnabled(false);
-        user.setPendingLogin(null);
-        user.setCompany_id(null);
+        String hashedPassword = passwordEncoder.encode(user.getPassword());
+        User newUser = new User(user.getLogin(), hashedPassword, user.getRole());
+        newUser.setEnabled(false);
+        newUser.setPendingLogin(null);
+        newUser.setCompany_id(null);
         Optional<Role> optionalRole = roleRepository.findById(2L);
-        if (optionalRole.isPresent()) { user.setRole(optionalRole.get()); }
+        if (optionalRole.isPresent()) { newUser.setRole(optionalRole.get()); }
         else { throw new RuntimeException("Роль не найдена!"); }
-        userRepository.save(user);
+        userRepository.save(newUser);
 
-        return jwtUtil.generateToken(user.getLogin(), user.getRole().getRole_id());
+        return jwtUtil.generateToken(newUser.getLogin(), newUser.getRole().getRole_id());
     }
 
     public String authenticateUser(String login, String password) {
@@ -260,7 +269,7 @@ public class UserService {
             throw new RuntimeException("Неверный логин или пароль!");
         }
 
-        if (!user.isEnabled()) {
+        if (!user.getEnabled()) {
             throw new DisabledException("Аккаунт не подтвержден. Проверьте почту.");
         }
 

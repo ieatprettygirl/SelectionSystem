@@ -149,7 +149,11 @@
 			<scope>test</scope>
 		</dependency>
 
-
+		<dependency>
+			<groupId>de.siegmar</groupId>
+			<artifactId>logback-gelf</artifactId>
+			<version>4.0.2</version>
+		</dependency>
 
 	</dependencies>
 

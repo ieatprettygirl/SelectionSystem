@@ -21,7 +21,7 @@ import java.util.concurrent.ExecutionException;
 @EnableAsync
 @Slf4j
 // base URL
-@RequestMapping("/api/")
+@RequestMapping("/api/comp-vac/")
 public class VacancyController {
 
     private final VacancyService vacancyService;

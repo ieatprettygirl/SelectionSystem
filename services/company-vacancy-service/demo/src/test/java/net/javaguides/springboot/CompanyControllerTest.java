@@ -20,21 +20,39 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 @Slf4j
+@Testcontainers
 public class CompanyControllerTest {
+
+    @Container
+    private static final PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:17");
+
+    @DynamicPropertySource
+    static void configureProperties(DynamicPropertyRegistry registry) {
+        registry.add("spring.datasource.url", postgres::getJdbcUrl);
+        registry.add("spring.datasource.username", postgres::getUsername);
+        registry.add("spring.datasource.password", postgres::getPassword);
+    }
 
     @Autowired
     private WebApplicationContext context;
@@ -53,10 +71,13 @@ public class CompanyControllerTest {
     @BeforeEach
     public void setUp() {
         mockMvc = MockMvcBuilders
-                .webAppContextSetup(context)
+                .webAppContextSetup(this.context)
                 .apply(springSecurity()) // Включаем поддержку Spring Security
                 .build();
     }
+
+    @Test
+    void contextLoads() {}
 
     // Company-test-getAll
     @Test
@@ -68,7 +89,7 @@ public class CompanyControllerTest {
         token = jwtUtil.generateToken("user1", 1L);
         when(companyService.getAllCompanies()).thenReturn(CompletableFuture.completedFuture(companies));
         // Выполнение запроса и проверка результата
-        MvcResult result = mockMvc.perform(get("/api/company")
+        MvcResult result = mockMvc.perform(get("/api/comp-vac/company")
                         .header("Authorization", "Bearer " + token))
                 .andExpect(status().isOk())
                 .andReturn(); // Получаем результат выполнения запроса
@@ -86,7 +107,7 @@ public class CompanyControllerTest {
 
         token = jwtUtil.generateToken("user1", 1L);
         // Выполнение запроса и проверка результата
-        MvcResult result = mockMvc.perform(get("/api/company")
+        MvcResult result = mockMvc.perform(get("/api/comp-vac/company")
                         .header("Authorization", "Bearer " + token))
                 .andExpect(status().isOk())
                 .andReturn(); // Получаем результат выполнения запроса
@@ -105,7 +126,7 @@ public class CompanyControllerTest {
         token = jwtUtil.generateToken("user1", 2L);
         when(companyService.getAllCompanies()).thenReturn(CompletableFuture.completedFuture(companies));
 
-        MvcResult result = mockMvc.perform(get("/api/company")
+        MvcResult result = mockMvc.perform(get("/api/comp-vac/company")
                         .header("Authorization", "Bearer " + token))
                 .andExpect(status().isForbidden()) //403
                 .andReturn();
@@ -120,7 +141,7 @@ public class CompanyControllerTest {
         token = "52";
         when(companyService.getAllCompanies()).thenReturn(CompletableFuture.completedFuture(companies));
 
-        MvcResult result = mockMvc.perform(get("/api/company")
+        MvcResult result = mockMvc.perform(get("/api/comp-vac/company")
                 .header("Authorization", "Bearer " + token))
                 .andExpect(status().isUnauthorized()) //401 (invalid token)
                 .andReturn();
@@ -140,7 +161,7 @@ public class CompanyControllerTest {
         token = jwtUtil.generateToken("user1", 1L);
         when(companyService.createCompany(any(Company.class))).thenReturn(CompletableFuture.completedFuture(company1));
         // Выполнение запроса и проверка результата
-        MvcResult result = mockMvc.perform(post("/api/company")
+        MvcResult result = mockMvc.perform(post("/api/comp-vac/company")
                         .header("Authorization", "Bearer " + token)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(new ObjectMapper().writeValueAsString(company1)))
@@ -165,7 +186,7 @@ public class CompanyControllerTest {
         token = jwtUtil.generateToken("user1", 1L);
         when(companyService.createCompany(null)).thenReturn(CompletableFuture.completedFuture(company1));
         // Выполнение запроса и проверка результата
-        MvcResult result = mockMvc.perform(post("/api/company")
+        MvcResult result = mockMvc.perform(post("/api/comp-vac/company")
                         .header("Authorization", "Bearer " + token)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(new ObjectMapper().writeValueAsString(company1)))
@@ -190,7 +211,7 @@ public class CompanyControllerTest {
         token = jwtUtil.generateToken("user1", 2L);
         when(companyService.createCompany(any(Company.class))).thenReturn(CompletableFuture.completedFuture(company1));
         // Выполнение запроса и проверка результата
-        MvcResult result = mockMvc.perform(post("/api/company")
+        MvcResult result = mockMvc.perform(post("/api/comp-vac/company")
                         .header("Authorization", "Bearer " + token)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(new ObjectMapper().writeValueAsString(company1)))
@@ -214,7 +235,7 @@ public class CompanyControllerTest {
         companyOneDto.setCompany_id(id);
         when(companyService.getOneCompany(id)).thenReturn(CompletableFuture.completedFuture(companyOneDto));
         // Выполнение запроса и проверка результата
-        MvcResult result = mockMvc.perform(get("/api/company/{id}", id)
+        MvcResult result = mockMvc.perform(get("/api/comp-vac/company/{id}", id)
                         .header("Authorization", "Bearer " + token))
                 .andExpect(status().isOk())
                 .andReturn(); // Получаем результат выполнения запроса
@@ -234,7 +255,7 @@ public class CompanyControllerTest {
 
         when(companyService.getOneCompany(id)).thenThrow(new ResourceNotFoundException("Компании с id: " + id + " не существует!"));
         // Выполнение запроса и проверка результата
-        MvcResult result = mockMvc.perform(get("/api/company/{id}", id)
+        MvcResult result = mockMvc.perform(get("/api/comp-vac/company/{id}", id)
                         .header("Authorization", "Bearer " + token))
                 .andExpect(status().isNotFound())
                 .andReturn(); // Получаем результат выполнения запроса
@@ -258,7 +279,7 @@ public class CompanyControllerTest {
 
         when(companyService.updateCompany(anyLong(), any(Company.class))).thenReturn(CompletableFuture.completedFuture(company1));
         // Выполнение запроса и проверка результата
-        MvcResult result = mockMvc.perform(put("/api/company/{id}", id)
+        MvcResult result = mockMvc.perform(put("/api/comp-vac/company/{id}", id)
                         .header("Authorization", "Bearer " + token)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(new ObjectMapper().writeValueAsString(company1)))
@@ -283,7 +304,7 @@ public class CompanyControllerTest {
 
         when(companyService.updateCompany(id, any(Company.class))).thenThrow(new ResourceNotFoundException("Компании с id: " + id + " не существует!"));
         // Выполнение запроса и проверка результата
-        MvcResult result = mockMvc.perform(put("/api/company/{id}", id)
+        MvcResult result = mockMvc.perform(put("/api/comp-vac/company/{id}", id)
                         .header("Authorization", "Bearer " + token)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(new ObjectMapper().writeValueAsString(company1)))
@@ -307,7 +328,7 @@ public class CompanyControllerTest {
 
         when(companyService.updateCompany(id, company1)).thenThrow(new ResourceNotFoundException("Компании с id: " + id + " не существует!"));
         // Выполнение запроса и проверка результата
-        MvcResult result = mockMvc.perform(put("/api/company/{id}", id)
+        MvcResult result = mockMvc.perform(put("/api/comp-vac/company/{id}", id)
                         .header("Authorization", "Bearer " + token)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(new ObjectMapper().writeValueAsString(company1)))
@@ -333,7 +354,7 @@ public class CompanyControllerTest {
 
         when(companyService.deleteCompany(id)).thenReturn(CompletableFuture.completedFuture(ResponseEntity.ok(response).getBody()));
         // Выполнение запроса и проверка результата
-        MvcResult result = mockMvc.perform(delete("/api/company/{id}", id)
+        MvcResult result = mockMvc.perform(delete("/api/comp-vac/company/{id}", id)
                         .header("Authorization", "Bearer " + token)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -354,7 +375,7 @@ public class CompanyControllerTest {
 
         when(companyService.deleteCompany(id)).thenThrow(new ResourceNotFoundException("Компании с id: " + id + " не существует!"));
         // Выполнение запроса и проверка результата
-        MvcResult result = mockMvc.perform(delete("/api/company/{id}", id)
+        MvcResult result = mockMvc.perform(delete("/api/comp-vac/company/{id}", id)
                         .header("Authorization", "Bearer " + token)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound())
@@ -378,7 +399,7 @@ public class CompanyControllerTest {
 
         when(companyService.deleteCompany(id)).thenReturn(CompletableFuture.completedFuture(ResponseEntity.ok(response).getBody()));
         // Выполнение запроса и проверка результата
-        MvcResult result = mockMvc.perform(delete("/api/company/{id}", id)
+        MvcResult result = mockMvc.perform(delete("/api/comp-vac/company/{id}", id)
                         .header("Authorization", "Bearer " + token)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isForbidden())

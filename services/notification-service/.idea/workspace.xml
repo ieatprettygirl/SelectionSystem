@@ -5,19 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cec22246-d7c5-4b7e-b2b7-e63597192da5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../auth-service/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-service/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/src/main/resources/logback-spring.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../auth-service/demo/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-service/demo/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../auth-service/demo/src/main/java/net/javaguides/springboot/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-service/demo/src/main/java/net/javaguides/springboot/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../auth-service/demo/src/main/java/net/javaguides/springboot/model/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-service/demo/src/main/java/net/javaguides/springboot/model/Role.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../auth-service/demo/src/main/java/net/javaguides/springboot/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-service/demo/src/main/java/net/javaguides/springboot/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../auth-service/demo/src/main/java/net/javaguides/springboot/service/KafkaProducerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-service/demo/src/main/java/net/javaguides/springboot/service/KafkaProducerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../auth-service/demo/src/main/java/net/javaguides/springboot/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-service/demo/src/main/java/net/javaguides/springboot/service/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../auth-service/demo/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-service/demo/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../auth-service/demo/src/test/java/net/javaguides/springboot/SpringbootBackendApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../company-vacancy-service/demo/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../company-vacancy-service/demo/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../company-vacancy-service/demo/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../company-vacancy-service/demo/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nginx/conf.d/gateway.conf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nginx/logs/access.log" beforeDir="false" afterPath="$PROJECT_DIR$/../nginx/logs/access.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nginx/logs/error.log" beforeDir="false" afterPath="$PROJECT_DIR$/../nginx/logs/error.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nginx/nginx.conf" beforeDir="false" afterPath="$PROJECT_DIR$/../nginx/nginx.conf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/example/demo/service/EmailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/example/demo/service/EmailService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/demo/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,26 +44,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "Spring Boot.DemoApplication.executor": "Run",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "G:/Projects/microservices-project/company-vacancy-service",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;Spring Boot.DemoApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;G:/Projects/microservices-project/notification-service&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="DemoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="demo" />
@@ -92,6 +93,8 @@
       <workItem from="1741356424510" duration="5833000" />
       <workItem from="1741411689528" duration="1524000" />
       <workItem from="1741523010546" duration="1208000" />
+      <workItem from="1743175544110" duration="44000" />
+      <workItem from="1743176359628" duration="2625000" />
     </task>
     <servers />
   </component>

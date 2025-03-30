@@ -19,7 +19,7 @@ import java.util.concurrent.ExecutionException;
 @RestController
 @Slf4j
 // base URL
-@RequestMapping("/api/")
+@RequestMapping("/api/auth/")
 public class UserController {
 
     private final UserService userService;
@@ -30,25 +30,25 @@ public class UserController {
     }
 
     // register user
-    @PostMapping("/auth/register")
+    @PostMapping("/register")
     public ResponseEntity<Map<String, Object>> createUser(@Valid @RequestBody User user) throws ExecutionException, InterruptedException, JsonProcessingException {
         return userService.createUser(user).get();
     }
 
     // confirm account
-    @GetMapping("/auth/confirm")
+    @GetMapping("/confirm")
     public ResponseEntity<Map<String, Object>> confirmEmailUser(@RequestParam String token) throws ExecutionException, InterruptedException {
         return userService.confirmEmailUser(token).get();
     }
 
     // login and authenticate
-    @PostMapping("/auth/login")
+    @PostMapping("/login")
     public ResponseEntity<Map<String, Object>> login(@RequestBody @Valid Map<String, String> loginRequest) throws ExecutionException, InterruptedException {
         return userService.login(loginRequest).get();
     }
 
     // confirm change email
-    @GetMapping("/auth/confirm-email-change")
+    @GetMapping("/confirm-email-change")
     public ResponseEntity<Map<String, Object>> confirmEmailChange(HttpServletRequest request, @RequestParam String token) throws ExecutionException, InterruptedException {
         return userService.confirmEmailChange(token).get();
     }
