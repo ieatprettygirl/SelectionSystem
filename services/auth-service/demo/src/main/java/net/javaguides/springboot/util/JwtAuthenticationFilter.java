@@ -8,6 +8,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
@@ -31,6 +32,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Value("${jwt.secret.key}")
     private String jwtSecret;
 
+    private final JwtUtil jwtUtil;
+    @Autowired
+    public JwtAuthenticationFilter(JwtUtil jwtUtil) {
+        this.jwtUtil = jwtUtil;
+    }
+
     @Override
     public void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
@@ -48,6 +55,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             String jwtToken = authHeader.substring(7);
+
+            // check token in black list
+            if (!jwtUtil.isTokenValid(jwtToken)) {
+                sendErrorResponse(response, HttpServletResponse.SC_UNAUTHORIZED);
+                return; // Прерываем дальнейшее выполнение
+            }
+
             try {
                 // Создаем секретный ключ из конфигурации
                 SecretKey secretKey = new SecretKeySpec(jwtSecret.getBytes(), SignatureAlgorithm.HS256.getJcaName());
@@ -99,5 +113,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         // Отправляем JSON-ответ
         response.getWriter().write(jsonResponse);
+    }
+
+    private String extractToken(HttpServletRequest request) {
+        String bearerToken = request.getHeader("Authorization");
+        if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
+            return bearerToken.substring(7);
+        }
+        return null;
     }
 }

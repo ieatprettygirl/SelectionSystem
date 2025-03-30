@@ -3,6 +3,9 @@ package net.javaguides.springboot.config;
 import net.javaguides.springboot.util.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
@@ -32,9 +35,16 @@ public class SecurityConfig {
     private final CustomAccessDeniedHandler customAccessDeniedHandler;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
-    public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter, CustomAccessDeniedHandler customAccessDeniedHandler) {
+    public SecurityConfig(@Lazy JwtAuthenticationFilter jwtAuthenticationFilter, CustomAccessDeniedHandler customAccessDeniedHandler) {
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
         this.customAccessDeniedHandler = customAccessDeniedHandler;
+    }
+
+    @Bean
+    public RedisTemplate<String, String> redisTemplate(RedisConnectionFactory connectionFactory) {
+        RedisTemplate<String, String> template = new RedisTemplate<>();
+        template.setConnectionFactory(connectionFactory);
+        return template;
     }
 
     @Bean
@@ -47,7 +57,10 @@ public class SecurityConfig {
                         .requestMatchers("/api/auth/confirm").permitAll()
                         .requestMatchers("/api/auth/confirm-email-change").permitAll()
                         .anyRequest().authenticated() // Запросы с аутентификацией
+
                 )
+
+
                 .exceptionHandling(httpExceptionHandling ->
                         httpExceptionHandling.accessDeniedHandler(customAccessDeniedHandler)
                 )

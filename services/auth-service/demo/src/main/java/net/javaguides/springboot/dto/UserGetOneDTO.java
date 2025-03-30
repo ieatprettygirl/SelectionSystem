@@ -1,20 +1,25 @@
 package net.javaguides.springboot.dto;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+import net.javaguides.springboot.model.Role;
 
 @Getter
 @Setter
 public class UserGetOneDTO {
-    private String full_name;
-    private int age;
-    private String education;
-    private double middle_grade;
 
-    public UserGetOneDTO(String full_name, int age, String education, double middle_grade) {
-        this.full_name = full_name;
-        this.age = age;
-        this.education = education;
-        this.middle_grade = middle_grade;
-    }
+    @Column(nullable = false, unique = true)
+    private String login;
+
+    @NotNull
+    @Column(nullable = false)
+    private String password;
+
+    @NotNull
+    private Long role_id;
+
+    private Long company_id;
+
 }

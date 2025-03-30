@@ -6,11 +6,23 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import java.util.regex.Pattern;
+
 @Service
 @RequiredArgsConstructor
 public class EmailService {
 
     private final JavaMailSender mailSender;
+
+    private static final String EMAIL_REGEX = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
+
+    public boolean isValidEmail(String email) {
+        if (email == null) {
+            return false;
+        }
+        Pattern pattern = Pattern.compile(EMAIL_REGEX);
+        return pattern.matcher(email).matches();
+    }
 
     @Async
     public void sendVerificationEmail(String to, String token) {
