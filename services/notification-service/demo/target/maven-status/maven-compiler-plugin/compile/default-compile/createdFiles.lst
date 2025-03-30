@@ -1,0 +1,4 @@
+com\example\demo\service\EmailService.class
+com\example\demo\DemoApplication.class
+com\example\demo\dto\UserRegistrationEvent.class
+com\example\demo\config\AppConfig.class

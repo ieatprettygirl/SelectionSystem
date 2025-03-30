@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e309011c-4768-4e8b-bc19-d4ef95e48500" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../auth-service/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-service/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth-service/demo/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-service/demo/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth-service/demo/src/main/java/net/javaguides/springboot/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-service/demo/src/main/java/net/javaguides/springboot/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth-service/demo/src/main/java/net/javaguides/springboot/model/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-service/demo/src/main/java/net/javaguides/springboot/model/Role.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth-service/demo/src/main/java/net/javaguides/springboot/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-service/demo/src/main/java/net/javaguides/springboot/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth-service/demo/src/main/java/net/javaguides/springboot/service/KafkaProducerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-service/demo/src/main/java/net/javaguides/springboot/service/KafkaProducerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth-service/demo/src/main/java/net/javaguides/springboot/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-service/demo/src/main/java/net/javaguides/springboot/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth-service/demo/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-service/demo/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth-service/demo/src/test/java/net/javaguides/springboot/SpringbootBackendApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../notification-service/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../notification-service/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../notification-service/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../notification-service/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../notification-service/demo/src/main/java/com/example/demo/service/EmailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../notification-service/demo/src/main/java/com/example/demo/service/EmailService.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;ieatprettygirl&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/ieatprettygirl/microservices-project&quot;,
+    &quot;accountId&quot;: &quot;a7008fd6-f09a-4d6e-b4be-71e96e39a2af&quot;
+  }
+}</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/demo/src/test/java/net/javaguides/springboot/CompanyControllerTest.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2t77loE2m5OwWPDvOgGVwNrjsjR" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JUnit.CompanyControllerTest.executor": "Run",
+    "JUnit.CompanyControllerTest.testDelete_SuccessfullyCompany.executor": "Debug",
+    "JUnit.CompanyControllerTest.testGetAllCompanies_withOutRole.executor": "Debug",
+    "JUnit.CompanyControllerTest.testGetOnyCompany.executor": "Debug",
+    "JUnit.CompanyControllerTest.testPostSuccessfullyCompany.executor": "Run",
+    "JUnit.SpringbootBackendApplicationTests.executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "Spring Boot.SpringbootBackendApplication.executor": "Run",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "G:/Projects/microservices-project/company-vacancy-service",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager" selected="Spring Boot.SpringbootBackendApplication">
+    <configuration name="CompanyControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="demo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="net.javaguides.springboot.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="net.javaguides.springboot" />
+      <option name="MAIN_CLASS_NAME" value="net.javaguides.springboot.CompanyControllerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CompanyControllerTest.testPostSuccessfullyCompany" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="demo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="net.javaguides.springboot.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="net.javaguides.springboot" />
+      <option name="MAIN_CLASS_NAME" value="net.javaguides.springboot.CompanyControllerTest" />
+      <option name="METHOD_NAME" value="testPostSuccessfullyCompany" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SpringbootBackendApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="demo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="net.javaguides.springboot.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="net.javaguides.springboot" />
+      <option name="MAIN_CLASS_NAME" value="net.javaguides.springboot.SpringbootBackendApplicationTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SpringbootBackendApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="localhost" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="net.javaguides.springboot.SpringbootBackendApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.CompanyControllerTest" />
+        <item itemvalue="JUnit.CompanyControllerTest.testPostSuccessfullyCompany" />
+        <item itemvalue="JUnit.SpringbootBackendApplicationTests" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.23654.153" />
+        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-IU-243.23654.153" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e309011c-4768-4e8b-bc19-d4ef95e48500" name="Changes" comment="" />
+      <created>1739691413295</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1739691413295</updated>
+      <workItem from="1739691414992" duration="2432000" />
+      <workItem from="1739790299592" duration="12000" />
+      <workItem from="1739790428329" duration="153000" />
+      <workItem from="1739792039258" duration="8565000" />
+      <workItem from="1739802708448" duration="8185000" />
+      <workItem from="1739861147621" duration="7869000" />
+      <workItem from="1739869967849" duration="12351000" />
+      <workItem from="1739882383335" duration="56000" />
+      <workItem from="1739882527096" duration="1215000" />
+      <workItem from="1739946174691" duration="34082000" />
+      <workItem from="1739983992186" duration="5415000" />
+      <workItem from="1739990172314" duration="6000" />
+      <workItem from="1739990472013" duration="1285000" />
+      <workItem from="1740393717505" duration="2100000" />
+      <workItem from="1740396386929" duration="2409000" />
+      <workItem from="1740399245752" duration="86000" />
+      <workItem from="1741077527089" duration="1173000" />
+      <workItem from="1741086539701" duration="9685000" />
+      <workItem from="1741159431641" duration="25000" />
+      <workItem from="1741165493027" duration="10263000" />
+      <workItem from="1741252892858" duration="6000" />
+      <workItem from="1741256951839" duration="709000" />
+      <workItem from="1741350300444" duration="2058000" />
+      <workItem from="1741356680961" duration="2390000" />
+      <workItem from="1741499593770" duration="1873000" />
+      <workItem from="1741523872838" duration="349000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/demo/src/main/java/net/javaguides/springboot/config/CustomAccessDeniedHandler.java</url>
+          <line>19</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="JUnit">
+        <watch expression="isOk" language="JAVA" />
+        <watch expression="((DelegateFilter)mockMvc.filters[0]).delegate" language="JAVA" custom="org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurer.DelegateFilter" />
+      </configuration>
+    </watches-manager>
+  </component>
+</project>
