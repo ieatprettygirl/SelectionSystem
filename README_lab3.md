@@ -2,7 +2,7 @@
 
 # Практическая работа №3
 ## Моя распределенная система:
-![alt text](resources/600x900.webp)
+![image](https://github.com/user-attachments/assets/d6a8bbe9-03a1-44d1-b531-94562b36712b)
 
 </div>
 
